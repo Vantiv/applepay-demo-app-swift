@@ -500,6 +500,7 @@
 				94CFFD481D64CE2A00A8432A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		94CFFD491D64CE2A00A8432A /* Build configuration list for PBXNativeTarget "ApplePayDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +509,7 @@
 				94CFFD4B1D64CE2A00A8432A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		94CFFD4C1D64CE2A00A8432A /* Build configuration list for PBXNativeTarget "ApplePayDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +518,7 @@
 				94CFFD4E1D64CE2A00A8432A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
