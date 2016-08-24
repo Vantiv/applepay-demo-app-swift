@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94356F811D6CF2DF0044CBD5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94356F801D6CF2DF0044CBD5 /* Item.swift */; };
+		94356F851D6CF79A0044CBD5 /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94356F841D6CF79A0044CBD5 /* ItemTableViewController.swift */; };
+		94356F871D6CF7C40044CBD5 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94356F861D6CF7C40044CBD5 /* ItemTableViewCell.swift */; };
+		94356F891D6E1D660044CBD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94356F881D6E1D660044CBD5 /* LaunchScreen.storyboard */; };
 		94CFFD1F1D64CE2900A8432A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD1E1D64CE2900A8432A /* AppDelegate.swift */; };
-		94CFFD211D64CE2900A8432A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD201D64CE2900A8432A /* ViewController.swift */; };
+		94CFFD211D64CE2900A8432A /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD201D64CE2900A8432A /* ItemViewController.swift */; };
 		94CFFD241D64CE2900A8432A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94CFFD221D64CE2900A8432A /* Main.storyboard */; };
 		94CFFD271D64CE2900A8432A /* ApplePayDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD251D64CE2900A8432A /* ApplePayDemo.xcdatamodeld */; };
 		94CFFD291D64CE2900A8432A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94CFFD281D64CE2900A8432A /* Assets.xcassets */; };
-		94CFFD2C1D64CE2900A8432A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94CFFD2A1D64CE2900A8432A /* LaunchScreen.storyboard */; };
 		94CFFD371D64CE2A00A8432A /* ApplePayDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD361D64CE2A00A8432A /* ApplePayDemoTests.swift */; };
 		94CFFD421D64CE2A00A8432A /* ApplePayDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD411D64CE2A00A8432A /* ApplePayDemoUITests.swift */; };
-		C238E5351D679EA800C7A74D /* Images in Resources */ = {isa = PBXBuildFile; fileRef = C238E5341D679EA800C7A74D /* Images */; };
-		C238E5371D67A09D00C7A74D /* tommie.png in Resources */ = {isa = PBXBuildFile; fileRef = C238E5361D67A09D00C7A74D /* tommie.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,13 +38,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		94356F801D6CF2DF0044CBD5 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		94356F841D6CF79A0044CBD5 /* ItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
+		94356F861D6CF7C40044CBD5 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		94356F881D6E1D660044CBD5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94CFFD1B1D64CE2900A8432A /* ApplePayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApplePayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94CFFD1E1D64CE2900A8432A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		94CFFD201D64CE2900A8432A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		94CFFD201D64CE2900A8432A /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		94CFFD231D64CE2900A8432A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94CFFD261D64CE2900A8432A /* ApplePayDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ApplePayDemo.xcdatamodel; sourceTree = "<group>"; };
 		94CFFD281D64CE2900A8432A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		94CFFD2B1D64CE2900A8432A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94CFFD2D1D64CE2900A8432A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94CFFD321D64CE2A00A8432A /* ApplePayDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplePayDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94CFFD361D64CE2A00A8432A /* ApplePayDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayDemoTests.swift; sourceTree = "<group>"; };
@@ -52,8 +56,6 @@
 		94CFFD411D64CE2A00A8432A /* ApplePayDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayDemoUITests.swift; sourceTree = "<group>"; };
 		94CFFD431D64CE2A00A8432A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94CFFD4F1D64CE7000A8432A /* ApplePayDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ApplePayDemo.entitlements; sourceTree = "<group>"; };
-		C238E5341D679EA800C7A74D /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
-		C238E5361D67A09D00C7A74D /* tommie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tommie.png; path = ApplePayDemo/Images/tommie.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +86,6 @@
 		94CFFD121D64CE2800A8432A = {
 			isa = PBXGroup;
 			children = (
-				C238E5361D67A09D00C7A74D /* tommie.png */,
 				94CFFD1D1D64CE2900A8432A /* ApplePayDemo */,
 				94CFFD351D64CE2A00A8432A /* ApplePayDemoTests */,
 				94CFFD401D64CE2A00A8432A /* ApplePayDemoUITests */,
@@ -105,13 +106,15 @@
 		94CFFD1D1D64CE2900A8432A /* ApplePayDemo */ = {
 			isa = PBXGroup;
 			children = (
-				C238E5341D679EA800C7A74D /* Images */,
 				94CFFD4F1D64CE7000A8432A /* ApplePayDemo.entitlements */,
 				94CFFD1E1D64CE2900A8432A /* AppDelegate.swift */,
-				94CFFD201D64CE2900A8432A /* ViewController.swift */,
+				94CFFD201D64CE2900A8432A /* ItemViewController.swift */,
+				94356F801D6CF2DF0044CBD5 /* Item.swift */,
 				94CFFD221D64CE2900A8432A /* Main.storyboard */,
+				94356F861D6CF7C40044CBD5 /* ItemTableViewCell.swift */,
+				94356F841D6CF79A0044CBD5 /* ItemTableViewController.swift */,
 				94CFFD281D64CE2900A8432A /* Assets.xcassets */,
-				94CFFD2A1D64CE2900A8432A /* LaunchScreen.storyboard */,
+				94356F881D6E1D660044CBD5 /* LaunchScreen.storyboard */,
 				94CFFD2D1D64CE2900A8432A /* Info.plist */,
 				94CFFD251D64CE2900A8432A /* ApplePayDemo.xcdatamodeld */,
 			);
@@ -246,9 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C238E5371D67A09D00C7A74D /* tommie.png in Resources */,
-				C238E5351D679EA800C7A74D /* Images in Resources */,
-				94CFFD2C1D64CE2900A8432A /* LaunchScreen.storyboard in Resources */,
+				94356F891D6E1D660044CBD5 /* LaunchScreen.storyboard in Resources */,
 				94CFFD291D64CE2900A8432A /* Assets.xcassets in Resources */,
 				94CFFD241D64CE2900A8432A /* Main.storyboard in Resources */,
 			);
@@ -275,8 +276,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94CFFD211D64CE2900A8432A /* ViewController.swift in Sources */,
+				94356F851D6CF79A0044CBD5 /* ItemTableViewController.swift in Sources */,
+				94356F811D6CF2DF0044CBD5 /* Item.swift in Sources */,
+				94CFFD211D64CE2900A8432A /* ItemViewController.swift in Sources */,
 				94CFFD1F1D64CE2900A8432A /* AppDelegate.swift in Sources */,
+				94356F871D6CF7C40044CBD5 /* ItemTableViewCell.swift in Sources */,
 				94CFFD271D64CE2900A8432A /* ApplePayDemo.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,14 +323,6 @@
 				94CFFD231D64CE2900A8432A /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		94CFFD2A1D64CE2900A8432A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				94CFFD2B1D64CE2900A8432A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

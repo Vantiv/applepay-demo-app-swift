@@ -3,7 +3,7 @@
 //  ApplePayDemo
 //
 //  Created by Alec Paulson on 8/17/16.
-//  Copyright © 2016 Alec Paulson. All rights reserved.
+//  Copyright © 2016 Vantiv. All rights reserved.
 //
 
 import UIKit

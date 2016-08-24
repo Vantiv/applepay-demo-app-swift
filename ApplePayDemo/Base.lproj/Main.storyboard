@@ -1,46 +1,147 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Lwt-JN-Ruq">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Vantiv Store-->
+        <scene sceneID="ws2-an-KQ9">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ApplePayDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <tableViewController id="g8g-45-iXL" customClass="ItemTableViewController" customModule="ApplePayDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="uGv-Uj-rZg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ItemTableViewCell" rowHeight="90" id="1bV-AG-cNb" customClass="ItemTableViewCell" customModule="ApplePayDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1bV-AG-cNb" id="Iig-Jq-fcL">
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="89"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YTW-SX-faS">
+                                            <rect key="frame" x="0.0" y="0.0" width="89" height="89"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKE-4U-ZXu">
+                                            <rect key="frame" x="97" y="8" width="462" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iej-9d-jgp">
+                                            <rect key="frame" x="97" y="37" width="462" height="44"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="qKE-4U-ZXu" id="KPS-fO-agf"/>
+                                    <outlet property="photoImageView" destination="YTW-SX-faS" id="LrW-7R-g7a"/>
+                                    <outlet property="priceLabel" destination="iej-9d-jgp" id="RcJ-7J-7gJ"/>
+                                    <segue destination="JmS-LR-yqO" kind="show" id="4dx-E3-sqs"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="g8g-45-iXL" id="gTJ-Yi-S29"/>
+                            <outlet property="delegate" destination="g8g-45-iXL" id="pF9-8a-o5K"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Vantiv Store" id="SWi-vi-2Ue"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2h0-jf-yGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1110" y="430"/>
+        </scene>
+        <!--Item View Controller-->
+        <scene sceneID="wFI-Vm-dv6">
+            <objects>
+                <viewController id="JmS-LR-yqO" customClass="ItemViewController" customModule="ApplePayDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eUA-AV-Rob"/>
+                        <viewControllerLayoutGuide type="bottom" id="ma3-fk-M9X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="P9f-ey-iMD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="z51-dS-8ro">
-                                <rect key="frame" x="35" y="405" width="250" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.66274509800000003" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Pay with ApplePay"/>
-                                <connections>
-                                    <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dgx-7r-4RF"/>
-                                </connections>
-                            </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="tommie.png" id="6Ii-yM-wEc">
-                                <rect key="frame" x="108" y="246" width="104" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jau-UE-goB">
+                                <rect key="frame" x="20" y="74" width="560" height="356"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nml-ZN-oLJ">
+                                        <rect key="frame" x="259" y="0.0" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Yl-og-6Bg">
+                                        <rect key="frame" x="160" y="21" width="240" height="240"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="240" id="x7h-GQ-x8x"/>
+                                            <constraint firstAttribute="width" constant="240" id="yB9-GH-SwR"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfR-Ws-rNA">
+                                        <rect key="frame" x="259" y="261" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89J-I0-wvR">
+                                        <rect key="frame" x="183" y="282" width="194" height="74"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" image="ApplePayButton"/>
+                                        <connections>
+                                            <action selector="buttonPressed:" destination="JmS-LR-yqO" eventType="touchUpInside" id="95a-KO-Hiu"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jau-UE-goB" firstAttribute="top" secondItem="eUA-AV-Rob" secondAttribute="bottom" constant="10" id="caS-X3-SXB"/>
+                            <constraint firstItem="jau-UE-goB" firstAttribute="trailing" secondItem="P9f-ey-iMD" secondAttribute="trailingMargin" id="eJ6-ze-W5a"/>
+                            <constraint firstItem="jau-UE-goB" firstAttribute="leading" secondItem="P9f-ey-iMD" secondAttribute="leadingMargin" id="tgN-Ra-M5q"/>
+                        </constraints>
                     </view>
-                    <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationItem key="navigationItem" id="1fe-Ew-TU5"/>
                     <connections>
-                        <outlet property="applePayButton" destination="z51-dS-8ro" id="Rf7-6w-at1"/>
+                        <outlet property="applePayButton" destination="89J-I0-wvR" id="OJB-Dv-Dmb"/>
+                        <outlet property="nameLabel" destination="Nml-ZN-oLJ" id="wIa-Jb-IpV"/>
+                        <outlet property="photoImageView" destination="2Yl-og-6Bg" id="Uwz-Lz-ktD"/>
+                        <outlet property="priceLabel" destination="lfR-Ws-rNA" id="zlD-fL-aMs"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J02-71-zNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="162.66666666666666" y="406.12"/>
+            <point key="canvasLocation" x="2021" y="430"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Wj7-V6-WBD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lwt-JN-Ruq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tTH-oX-xje">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="g8g-45-iXL" kind="relationship" relationship="rootViewController" id="R2i-cX-mFh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rF9-88-jRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="112.5" y="430.9859154929577"/>
         </scene>
     </scenes>
     <resources>
-        <image name="tommie.png" width="104" height="114"/>
+        <image name="ApplePayButton" width="194" height="64"/>
     </resources>
 </document>
