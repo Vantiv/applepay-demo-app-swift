@@ -5,6 +5,7 @@
 	<key>com.apple.developer.in-app-payments</key>
 	<array>
 		<string>merchant.com.vantiv.applepaydemo</string>
+		<string>merchant.com.mercury.prelive</string>
 	</array>
 </dict>
 </plist>
