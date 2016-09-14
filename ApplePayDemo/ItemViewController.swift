@@ -17,7 +17,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBOutlet weak var photoImageView: UIImageView!
     
     let SupportedPaymentNetworks = [PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex, PKPaymentNetworkDiscover]
-    let ApplePayMerchantID = "merchant.com.vantiv.applepaydemo"
+    let ApplePayMerchantID = "merchant.com.mercury.prelive"
     let ShippingPrice : NSDecimalNumber = NSDecimalNumber(string: "5.0")
     var item: Item?
         
@@ -53,6 +53,8 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         //request.requiredBillingAddressFields = PKAddressField.All
         request.requiredShippingAddressFields = PKAddressField.All
         
+        //request.applicationData = "This is a test".dataUsingEncoding(NSUTF8StringEncoding)
+        
         request.paymentSummaryItems = [
             PKPaymentSummaryItem(label: item!.name, amount: item!.price),
             PKPaymentSummaryItem(label: "Shipping", amount: ShippingPrice),
@@ -68,11 +70,77 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
 
 extension ItemViewController: PKPaymentAuthorizationViewControllerDelegate {
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: ((PKPaymentAuthorizationStatus) -> Void)) {
+        let pkPaymentToken = payment.token
+        pkPaymentToken.paymentData //base64 encoded, applepay.data
+        
+        let json = try? NSJSONSerialization.JSONObjectWithData(pkPaymentToken.paymentData, options: NSJSONReadingOptions.AllowFragments)
+        
+        let version = json!["version"] as! String
+        let data = json!["data"] as! String
+        let signature = json!["signature"] as! String
+        let ephemeralPublicKey = (json!["header"] as! [String: String])["ephemeralPublicKey"]! as String
+        var applicationData: String = ""
+        if let appData = (json!["header"] as! [String: String])["applicationData"] {
+            applicationData = appData
+        }
+        let publicKeyHash = (json!["header"] as! [String: String])["publicKeyHash"]! as String
+        let transactionId = (json!["header"] as! [String: String])["transactionId"]! as String
+                
+        //call eprotect with paymentData
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage")!)
+        request.HTTPMethod = "POST"
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.addValue("request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage", forHTTPHeaderField: "Host")
+        request.addValue("Litle/1.0 CFNetwork/459 Darwin/10.0.0.d3", forHTTPHeaderField: "User-Agent")
+        let postString =
+            "paypageId=KjJkn9DXJjdesuBf" +
+                "&reportGroup=testReportGroup" +
+                "&orderId=testOrderId" +
+                "&id=00000" +
+                "&applePay.data=\(data)" +
+                "&applePay.signature=\(signature)" +
+                "&applePay.version=\(version)" +
+                "&applePay.header.applicationData=\(applicationData)" +
+                "&applePay.header.ephermeralPublicKey=\(ephemeralPublicKey)" +
+                "&applePay.header.publicKeyHash=\(publicKeyHash)" +
+                "&applePay.header.transactionId=\(transactionId)"
+                
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+        
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+        
+            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print("responseString = \(responseString)")
+        }
+        task.resume()
+        
+        //pass regid + order info to
+        //merchant server: send txn to netepay
+        
+        //TODO: Handle error condition
         completion(PKPaymentAuthorizationStatus.Success)
-        //let pkpaymenttoken = payment.token
     }
     
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        //controller.dismissViewControllerAnimated(true, completion: nil)
+        
+        controller.dismiss {
+            DispatchQueue.main.async {
+                if self.paymentStatus == .success {
+                    self.completionHandler!(success: true)
+                } else {
+                    self.completionHandler!(success: false)
+                }
+            }
+        }
     }
 }
