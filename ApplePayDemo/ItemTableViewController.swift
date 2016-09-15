@@ -44,26 +44,26 @@ class ItemTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "ItemTableViewCell"
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ItemTableViewCell
-        let item = items[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ItemTableViewCell
+        let item = items[(indexPath as NSIndexPath).row]
         
         cell.nameLabel.text = item.name
         cell.photoImageView.image = item.photo
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .CurrencyStyle
-        cell.priceLabel.text = formatter.stringFromNumber(item.price)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        cell.priceLabel.text = formatter.string(from: item.price)
         
         return cell
     }
@@ -106,12 +106,12 @@ class ItemTableViewController: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let itemDetailViewController = segue.destinationViewController as! ItemViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let itemDetailViewController = segue.destination as! ItemViewController
         
         if let selectedItemCell = sender as? ItemTableViewCell {
-            let indexPath = tableView.indexPathForCell(selectedItemCell)!
-            let selectedItem = items[indexPath.row]
+            let indexPath = tableView.indexPath(for: selectedItemCell)!
+            let selectedItem = items[(indexPath as NSIndexPath).row]
             itemDetailViewController.item = selectedItem
         }
     }
