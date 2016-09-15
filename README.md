@@ -8,7 +8,7 @@ Apple Pay App demonstrating how to integrate to Vantiv Integrated Payments
 
 * Create merchant id/app id
 
-* Install XCode (of course) - Currently using 8.0
+* Install Xcode (of course) - Currently using 8.0
 
 ## Simulating the Merchant Server
 
@@ -30,13 +30,13 @@ If it asks you to install XCode CommandLine Tools, say yes.
 
 `gem install sinatra`
 
-### To run the sinatra REST site
+### To run the Sinatra REST site
 
 `ruby merchant_server.rb`
 
 `control+c` to quit
 
-## Run App in XCode
+## Run App in Xcode
 
 * Must run app on iOS device w/ ApplePay support
 
