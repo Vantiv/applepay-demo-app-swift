@@ -17,7 +17,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     
-    let SupportedPaymentNetworks = [PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex, PKPaymentNetworkDiscover]
+    let SupportedPaymentNetworks = [PKPaymentNetwork.visa, PKPaymentNetwork.masterCard, PKPaymentNetwork.amex, PKPaymentNetwork.discover]
     let ApplePayMerchantID = "merchant.com.mercury.prelive"
     let ShippingPrice : NSDecimalNumber = NSDecimalNumber(string: "5.0")
     var item: Item?
@@ -25,16 +25,16 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        applePayButton.hidden = !PKPaymentAuthorizationViewController.canMakePaymentsUsingNetworks(SupportedPaymentNetworks)
+        applePayButton.isHidden = !PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: SupportedPaymentNetworks)
         
         // Set up views if editing an existing Meal.
         if let item = item {
             navigationItem.title = item.name
             nameLabel.text   = item.name
             photoImageView.image = item.photo
-            let formatter = NSNumberFormatter()
-            formatter.numberStyle = .CurrencyStyle
-            priceLabel.text = formatter.stringFromNumber(item.price)
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            priceLabel.text = formatter.string(from: item.price)
         }
     }
 
@@ -43,38 +43,38 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         // Dispose of any resources that can be recreated.
     }    
     
-    @IBAction func buttonPressed(sender: AnyObject) {
+    @IBAction func buttonPressed(_ sender: AnyObject) {
         
         let request = PKPaymentRequest()
         request.merchantIdentifier = ApplePayMerchantID
         request.supportedNetworks = SupportedPaymentNetworks
-        request.merchantCapabilities = PKMerchantCapability.Capability3DS
+        request.merchantCapabilities = PKMerchantCapability.capability3DS
         request.countryCode = "US"
         request.currencyCode = "USD"
         //request.requiredBillingAddressFields = PKAddressField.All
-        request.requiredShippingAddressFields = PKAddressField.All
+        request.requiredShippingAddressFields = PKAddressField.all
         
         //request.applicationData = "This is a test".dataUsingEncoding(NSUTF8StringEncoding)
         
         request.paymentSummaryItems = [
             PKPaymentSummaryItem(label: item!.name, amount: item!.price),
             PKPaymentSummaryItem(label: "Shipping", amount: ShippingPrice),
-            PKPaymentSummaryItem(label: "Demo Merchant", amount: item!.price.decimalNumberByAdding(ShippingPrice))
+            PKPaymentSummaryItem(label: "Demo Merchant", amount: item!.price.adding(ShippingPrice))
         ]
         
         let applePayController = PKPaymentAuthorizationViewController(paymentRequest: request)
         applePayController.delegate = self;
         
-        self.presentViewController(applePayController, animated: true, completion: nil)
+        self.present(applePayController, animated: true, completion: nil)
     }
 }
 
 extension ItemViewController: PKPaymentAuthorizationViewControllerDelegate {
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: ((PKPaymentAuthorizationStatus) -> Void)) {
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: (@escaping (PKPaymentAuthorizationStatus) -> Void)) {
         let pkPaymentToken = payment.token
-        pkPaymentToken.paymentData //base64 encoded, applepay.data
+        //pkPaymentToken.paymentData //base64 encoded, applepay.data
         
-        let json = try? NSJSONSerialization.JSONObjectWithData(pkPaymentToken.paymentData, options: NSJSONReadingOptions.AllowFragments)
+        let json = try? JSONSerialization.jsonObject(with: pkPaymentToken.paymentData, options: JSONSerialization.ReadingOptions.allowFragments) as! [String:AnyObject]
         
         let version = json!["version"] as! String
         let data = json!["data"] as! String
@@ -88,8 +88,8 @@ extension ItemViewController: PKPaymentAuthorizationViewControllerDelegate {
         let transactionId = (json!["header"] as! [String: String])["transactionId"]! as String
                 
         //call eprotect with paymentData
-        let eProtectRequest = NSMutableURLRequest(URL: NSURL(string: "https://request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage")!)
-        eProtectRequest.HTTPMethod = "POST"
+        var eProtectRequest = URLRequest(url: URL(string: "https://request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage")!)
+        eProtectRequest.httpMethod = "POST"
         eProtectRequest.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         eProtectRequest.addValue("request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage", forHTTPHeaderField: "Host")
         eProtectRequest.addValue("Litle/1.0 CFNetwork/459 Darwin/10.0.0.d3", forHTTPHeaderField: "User-Agent")
@@ -106,69 +106,63 @@ extension ItemViewController: PKPaymentAuthorizationViewControllerDelegate {
                 "&applePay.header.publicKeyHash=\(publicKeyHash)" +
                 "&applePay.header.transactionId=\(transactionId)"
                 
-        eProtectRequest.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        eProtectRequest.httpBody = postString.data(using: String.Encoding.utf8)
         
-        let eProtectTask = NSURLSession.sharedSession().dataTaskWithRequest(eProtectRequest) { data, response, error in
+        let eProtectTask = URLSession.shared.dataTask(with: eProtectRequest as URLRequest, completionHandler: { data, response, error in
             guard error == nil && data != nil else {                                                          // check for fundamental networking error
                 print("error=\(error)")
                 return
             }
         
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+            if let httpStatus = response as? HTTPURLResponse , httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
         
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
             print("responseString = \(responseString)")
-        }
+        }) 
         eProtectTask.resume()
         
         //pass regid + order info to
         //merchant server: send txn to netepay
-        let merchantRequest = NSMutableURLRequest(URL: NSURL(string: "http://localhost:4567")!)
-        merchantRequest.HTTPMethod = "POST"
+        //replace IP in next line with dev machine IP
+        let merchantRequest = NSMutableURLRequest(url: URL(string: "http://10.137.241.36:4567")!)
+        merchantRequest.httpMethod = "POST"
         merchantRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        let ipJson =
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        
+        let merchantJson =
             [
                 "registrationId":"0000000000000000000",
-                "amount": item!.price.decimalNumberByAdding(ShippingPrice),
+                "amount": nf.string(from: item!.price.adding(ShippingPrice))!,
                 "description": item!.name
-            ]
-        merchantRequest.HTTPBody = try? NSJSONSerialization.dataWithJSONObject(ipJson, options: .PrettyPrinted)
+            ] as [String : Any]
+        merchantRequest.httpBody = try? JSONSerialization.data(withJSONObject: merchantJson, options: .prettyPrinted)
 
-        let merchantTask = NSURLSession.sharedSession().dataTaskWithRequest(eProtectRequest) { data, response, error in
+        let merchantTask = URLSession.shared.dataTask(with: merchantRequest as URLRequest, completionHandler: { data, response, error in
             guard error == nil && data != nil else {                                                          // check for fundamental networking error
                 print("error=\(error)")
                 return
             }
             
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+            if let httpStatus = response as? HTTPURLResponse , httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
             
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
             print("responseString = \(responseString)")
-        }
+        }) 
         merchantTask.resume()
         
         //TODO: Handle error condition
-        completion(PKPaymentAuthorizationStatus.Success)
+        completion(PKPaymentAuthorizationStatus.success)
     }
     
-    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
-        //controller.dismissViewControllerAnimated(true, completion: nil)
-        
-        controller.dismiss {
-            DispatchQueue.main.async {
-                if self.paymentStatus == .success {
-                    self.completionHandler!(success: true)
-                } else {
-                    self.completionHandler!(success: false)
-                }
-            }
-        }
+    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
