@@ -11,6 +11,8 @@
 		94356F851D6CF79A0044CBD5 /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94356F841D6CF79A0044CBD5 /* ItemTableViewController.swift */; };
 		94356F871D6CF7C40044CBD5 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94356F861D6CF7C40044CBD5 /* ItemTableViewCell.swift */; };
 		94356F891D6E1D660044CBD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94356F881D6E1D660044CBD5 /* LaunchScreen.storyboard */; };
+		94A9EC8C1DC9393200B8DCA5 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94A9EC8B1DC9393200B8DCA5 /* Settings.plist */; };
+		94A9EC8E1DC9457D00B8DCA5 /* merchant_server in Resources */ = {isa = PBXBuildFile; fileRef = 94A9EC8D1DC9457D00B8DCA5 /* merchant_server */; };
 		94CFFD1F1D64CE2900A8432A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD1E1D64CE2900A8432A /* AppDelegate.swift */; };
 		94CFFD211D64CE2900A8432A /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD201D64CE2900A8432A /* ItemViewController.swift */; };
 		94CFFD241D64CE2900A8432A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94CFFD221D64CE2900A8432A /* Main.storyboard */; };
@@ -42,6 +44,9 @@
 		94356F841D6CF79A0044CBD5 /* ItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		94356F861D6CF7C40044CBD5 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		94356F881D6E1D660044CBD5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		94A9EC881DC9353600B8DCA5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		94A9EC8B1DC9393200B8DCA5 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		94A9EC8D1DC9457D00B8DCA5 /* merchant_server */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merchant_server; path = ../merchant_server; sourceTree = "<group>"; };
 		94CFFD1B1D64CE2900A8432A /* ApplePayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApplePayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94CFFD1E1D64CE2900A8432A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94CFFD201D64CE2900A8432A /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +91,8 @@
 		94CFFD121D64CE2800A8432A = {
 			isa = PBXGroup;
 			children = (
+				94A9EC8D1DC9457D00B8DCA5 /* merchant_server */,
+				94A9EC881DC9353600B8DCA5 /* .gitignore */,
 				94CFFD1D1D64CE2900A8432A /* ApplePayDemo */,
 				94CFFD351D64CE2A00A8432A /* ApplePayDemoTests */,
 				94CFFD401D64CE2A00A8432A /* ApplePayDemoUITests */,
@@ -117,6 +124,7 @@
 				94356F881D6E1D660044CBD5 /* LaunchScreen.storyboard */,
 				94CFFD2D1D64CE2900A8432A /* Info.plist */,
 				94CFFD251D64CE2900A8432A /* ApplePayDemo.xcdatamodeld */,
+				94A9EC8B1DC9393200B8DCA5 /* Settings.plist */,
 			);
 			path = ApplePayDemo;
 			sourceTree = "<group>";
@@ -202,7 +210,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Alec Paulson";
 				TargetAttributes = {
 					94CFFD1A1D64CE2800A8432A = {
@@ -210,6 +218,9 @@
 						DevelopmentTeam = QCUYL5MAX2;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 1;
+							};
 							com.apple.OMC = {
 								enabled = 1;
 							};
@@ -217,11 +228,13 @@
 					};
 					94CFFD311D64CE2A00A8432A = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = QCUYL5MAX2;
 						LastSwiftMigration = 0800;
 						TestTargetID = 94CFFD1A1D64CE2800A8432A;
 					};
 					94CFFD3C1D64CE2A00A8432A = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = QCUYL5MAX2;
 						LastSwiftMigration = 0800;
 						TestTargetID = 94CFFD1A1D64CE2800A8432A;
 					};
@@ -253,6 +266,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				94356F891D6E1D660044CBD5 /* LaunchScreen.storyboard in Resources */,
+				94A9EC8C1DC9393200B8DCA5 /* Settings.plist in Resources */,
+				94A9EC8E1DC9457D00B8DCA5 /* merchant_server in Resources */,
 				94CFFD291D64CE2900A8432A /* Assets.xcassets in Resources */,
 				94CFFD241D64CE2900A8432A /* Main.storyboard in Resources */,
 			);
@@ -345,8 +360,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -368,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -391,8 +408,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -408,9 +427,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -423,6 +443,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = ApplePayDemo/ApplePayDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QCUYL5MAX2;
 				INFOPLIST_FILE = ApplePayDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vantiv.applepaydemo;
@@ -438,6 +459,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = ApplePayDemo/ApplePayDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = QCUYL5MAX2;
 				INFOPLIST_FILE = ApplePayDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vantiv.applepaydemo;
@@ -450,6 +472,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = QCUYL5MAX2;
 				INFOPLIST_FILE = ApplePayDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vantiv.ApplePayDemoTests;
@@ -463,6 +486,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = QCUYL5MAX2;
 				INFOPLIST_FILE = ApplePayDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vantiv.ApplePayDemoTests;
@@ -475,6 +499,7 @@
 		94CFFD4D1D64CE2A00A8432A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = QCUYL5MAX2;
 				INFOPLIST_FILE = ApplePayDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vantiv.ApplePayDemoUITests;
@@ -487,6 +512,7 @@
 		94CFFD4E1D64CE2A00A8432A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = QCUYL5MAX2;
 				INFOPLIST_FILE = ApplePayDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vantiv.ApplePayDemoUITests;
