@@ -52,5 +52,3 @@ NOTE: Use `control+c` to quit the web server
 * Must run app on iOS device w/ ApplePay support
 
 * Device must be on same network as dev machine
-
-* Change line in ItemViewController.swift:130 with IP address of development machine
