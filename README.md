@@ -51,4 +51,4 @@ NOTE: Use `control+c` to quit the web server
 
 * Must run app on iOS device w/ ApplePay support
 
-* Device must be on same network as dev machine
+* Device must be on same network as machine running `merchant_server.rb` script
