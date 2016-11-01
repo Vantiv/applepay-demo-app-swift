@@ -42,7 +42,7 @@ NOTE: Use `control+c` to quit the web server
 
 ## Before running App in XCode
 
-* Update Settings.plist with values for
+* Update `Settings.plist` with values for
 
   * `merchantServerAddress` - this will be the external ip address of the machine running the `merchant_server.rb` script
   * `paypageId` - provided by Vantiv Integrated Payments
