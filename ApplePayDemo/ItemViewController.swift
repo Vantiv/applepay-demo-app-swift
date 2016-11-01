@@ -21,13 +21,16 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     let ApplePayMerchantID = "merchant.com.mercury.prelive"
     let ShippingPrice : NSDecimalNumber = NSDecimalNumber(string: "5.0")
     var item: Item?
+    var merchantServerAddress: String = ""
+    var merchantServerPort: String = ""
+    var paypageId: String = ""
         
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         applePayButton.isHidden = !PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: SupportedPaymentNetworks)
         
-        // Set up views if editing an existing Meal.
+        // Set up item
         if let item = item {
             navigationItem.title = item.name
             nameLabel.text   = item.name
@@ -36,6 +39,16 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             formatter.numberStyle = .currency
             priceLabel.text = formatter.string(from: item.price)
         }
+        
+        // Read settings from plist
+        let path = Bundle.main.path(forResource: "Settings", ofType: "plist")!
+        let url = URL(fileURLWithPath: path)
+        let data = try! Data(contentsOf: url)
+        let plist = try! PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil)
+        let dict = plist as! [String:String]
+        merchantServerAddress = dict["merchantServerAddress"]!
+        merchantServerPort = dict["merchantServerPort"]!
+        paypageId = dict["paypageId"]!
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,75 +101,84 @@ extension ItemViewController: PKPaymentAuthorizationViewControllerDelegate {
         let transactionId = (json!["header"] as! [String: String])["transactionId"]! as String
                 
         //call eprotect with paymentData
-        var eProtectRequest = URLRequest(url: URL(string: "https://request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage")!)
-        eProtectRequest.httpMethod = "POST"
-        eProtectRequest.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        eProtectRequest.addValue("request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage", forHTTPHeaderField: "Host")
-        eProtectRequest.addValue("Litle/1.0 CFNetwork/459 Darwin/10.0.0.d3", forHTTPHeaderField: "User-Agent")
-        let postString =
-            "paypageId=***REMOVED***" +
-                "&reportGroup=testReportGroup" +
-                "&orderId=testOrderId" +
-                "&id=00000" +
-                "&applePay.data=\(data)" +
-                "&applePay.signature=\(signature)" +
-                "&applePay.version=\(version)" +
-                "&applePay.header.applicationData=\(applicationData)" +
-                "&applePay.header.ephermeralPublicKey=\(ephemeralPublicKey)" +
-                "&applePay.header.publicKeyHash=\(publicKeyHash)" +
-                "&applePay.header.transactionId=\(transactionId)"
+        let headers = [
+            "content-type": "application/x-www-form-urlencoded",
+            "host": "request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage",
+            "user-agent": "Litle/1.0 CFNetwork/459 Darwin/10.0.0.d3",
+            "cache-control": "no-cache"
+        ]
+        
+        let postData = NSMutableData(data: "paypageId=\(paypageId)".data(using: String.Encoding.utf8)!)
+        postData.append("&reportGroup=testReportGroup".data(using: String.Encoding.utf8)!)
+        postData.append("&orderId=testOrderId".data(using: String.Encoding.utf8)!)
+        postData.append("&id=00000".data(using: String.Encoding.utf8)!)
+        postData.append("&applepay.data=\(data.stringByAddingPercentEncodingForRFC3986()!)".data(using: String.Encoding.utf8)!)
+        postData.append("&applepay.signature=\(signature.stringByAddingPercentEncodingForRFC3986()!)".data(using: String.Encoding.utf8)!)
+        postData.append("&applepay.version=\(version.stringByAddingPercentEncodingForRFC3986()!)".data(using: String.Encoding.utf8)!)
+        postData.append("&applepay.header.ephemeralPublicKey=\(ephemeralPublicKey.stringByAddingPercentEncodingForRFC3986()!)".data(using: String.Encoding.utf8)!)
+        postData.append("&applepay.header.publicKeyHash=\(publicKeyHash.stringByAddingPercentEncodingForRFC3986()!)".data(using: String.Encoding.utf8)!)
+        postData.append("&applepay.header.transactionId=\(transactionId.stringByAddingPercentEncodingForRFC3986()!)".data(using: String.Encoding.utf8)!)
+        postData.append("&applepay.header.applicationData=\(applicationData.stringByAddingPercentEncodingForRFC3986()!)".data(using: String.Encoding.utf8)!)
+ 
+        let request = NSMutableURLRequest(url: NSURL(string: "https://request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headers
+        request.httpBody = postData as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error!)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print(httpResponse!)
+                print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
+                print(self.convertStringToDictionary(text: NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)!["paypageRegistrationId"]!)
                 
-        eProtectRequest.httpBody = postString.data(using: String.Encoding.utf8)
-        
-        let eProtectTask = URLSession.shared.dataTask(with: eProtectRequest as URLRequest, completionHandler: { data, response, error in
-            guard error == nil && data != nil else {                                                          // check for fundamental networking error
-                print("error=\(error)")
-                return
+                let jsonResponse = self.convertStringToDictionary(text: NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)!
+                let registrationId = jsonResponse["paypageRegistrationId"]!
+                
+                //pass regid + order info to
+                //merchant server: send txn to netepay
+                //replace IP in next line with dev machine IP
+                let merchantRequest = NSMutableURLRequest(url: URL(string: "http://\(self.merchantServerAddress):\(self.merchantServerPort)")!)
+                merchantRequest.httpMethod = "POST"
+                merchantRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+                
+                let nf = NumberFormatter()
+                nf.numberStyle = .decimal
+                
+                let merchantJson =
+                    [
+                        "registrationId":registrationId,
+                        "amount": nf.string(from: self.item!.price.adding(self.ShippingPrice))!,
+                        "description": self.item!.name
+                    ] as [String : Any]
+                merchantRequest.httpBody = try? JSONSerialization.data(withJSONObject: merchantJson, options: .prettyPrinted)
+                
+                let merchantTask = URLSession.shared.dataTask(with: merchantRequest as URLRequest, completionHandler: { data, response, error in
+                    guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                        print("error=\(error)")
+                        return
+                    }
+                    
+                    if let httpStatus = response as? HTTPURLResponse , httpStatus.statusCode != 200 {           // check for http errors
+                        print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                        print("response = \(response)")
+                    }
+                    
+                    let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                    print("responseString = \(responseString)")
+                }) 
+                merchantTask.resume()
             }
+        })
         
-            if let httpStatus = response as? HTTPURLResponse , httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
+        dataTask.resume()
         
-            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print("responseString = \(responseString)")
-        }) 
-        eProtectTask.resume()
         
-        //pass regid + order info to
-        //merchant server: send txn to netepay
-        //replace IP in next line with dev machine IP
-        let merchantRequest = NSMutableURLRequest(url: URL(string: "http://10.137.241.36:4567")!)
-        merchantRequest.httpMethod = "POST"
-        merchantRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        let nf = NumberFormatter()
-        nf.numberStyle = .decimal
-        
-        let merchantJson =
-            [
-                "registrationId":"0000000000000000000",
-                "amount": nf.string(from: item!.price.adding(ShippingPrice))!,
-                "description": item!.name
-            ] as [String : Any]
-        merchantRequest.httpBody = try? JSONSerialization.data(withJSONObject: merchantJson, options: .prettyPrinted)
-
-        let merchantTask = URLSession.shared.dataTask(with: merchantRequest as URLRequest, completionHandler: { data, response, error in
-            guard error == nil && data != nil else {                                                          // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse , httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print("responseString = \(responseString)")
-        }) 
-        merchantTask.resume()
         
         //TODO: Handle error condition
         completion(PKPaymentAuthorizationStatus.success)
@@ -164,5 +186,25 @@ extension ItemViewController: PKPaymentAuthorizationViewControllerDelegate {
     
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func convertStringToDictionary(text: NSString) -> [String:AnyObject]? {
+        if let data = text.data(using: String.Encoding.utf8.rawValue) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
+            } catch let error as NSError {
+                print(error)
+            }
+        }
+        return nil
+    }
+}
+
+extension String {
+    func stringByAddingPercentEncodingForRFC3986() -> String? {
+        let unreserved = "-._~/?"
+        let allowed = NSMutableCharacterSet.alphanumeric()
+        allowed.addCharacters(in: unreserved)
+        return addingPercentEncoding(withAllowedCharacters: allowed as CharacterSet)
     }
 }
