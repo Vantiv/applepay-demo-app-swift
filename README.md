@@ -30,11 +30,22 @@ If it asks you to install XCode CommandLine Tools, say yes.
 
 `gem install sinatra`
 
+### Update settings.yml
+
+Update `auth` with Base64 encoded credentials provided by Vantiv Integrated Payments
+
 ### To run the Sinatra REST site
 
 `ruby merchant_server.rb`
 
-`control+c` to quit
+NOTE: Use `control+c` to quit the web server
+
+## Before running App in XCode
+
+* Update Settings.plist with values for
+
+  * `merchantServerAddress` - this will be the external ip address of the machine running the `merchant_server.rb` script
+  * `paypageId` - provided by Vantiv Integrated Payments
 
 ## Run App in Xcode
 
