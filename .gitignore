@@ -9,6 +9,10 @@
 *.xcuserstate
 project.xcworkspace/
 xcuserdata/
+ApplePayDemo/Settings.plist
+
+# Ruby
+settings.yml
 
 # Backup files
 *~.nib
