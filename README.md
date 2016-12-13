@@ -1,6 +1,5 @@
 # applepay-demo-app-swift
 
-<<<<<<< HEAD
 Apple Pay iOS App demonstrating how to integrate to Vantiv Integrated Payments
 
 # Prerequisites
@@ -23,17 +22,6 @@ Apple Pay iOS App demonstrating how to integrate to Vantiv Integrated Payments
 * Create merchant id/app id
 
 * Install Xcode - Currently using 8.1
-=======
-Apple Pay App demonstrating how to integrate to Vantiv Integrated Payments
-
-# Setup (Work In Progress)
-
-* Set up apple pay in developer account
-
-* Create merchant id/app id
-
-* Install Xcode (of course) - Currently using 8.0
->>>>>>> origin/master
 
 ## Simulating the Merchant Server
 
@@ -47,11 +35,7 @@ If it asks you to install XCode CommandLine Tools, say yes.
 
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-<<<<<<< HEAD
 ### Install Ruby
-=======
-### Upgrade Ruby
->>>>>>> origin/master
 
 `brew install ruby`
 
@@ -69,30 +53,16 @@ Update `auth` with Base64 encoded credentials provided by Vantiv Integrated Paym
 
 NOTE: Use `control+c` to quit the web server
 
-<<<<<<< HEAD
 ## Before running App in Xcode
 
 * Update `Settings.plist` with values for
 
 * `merchantServerAddress` - this will be the external ip address of the machine running the `merchant_server.rb` script
 * `paypageId` - provided by Vantiv Integrated Payments
-=======
-## Before running App in XCode
-
-* Update `Settings.plist` with values for
-
-  * `merchantServerAddress` - this will be the external ip address of the machine running the `merchant_server.rb` script
-  * `paypageId` - provided by Vantiv Integrated Payments
->>>>>>> origin/master
 
 ## Run App in Xcode
 
 * Must run app on iOS device w/ ApplePay support
-<<<<<<< HEAD
 * [Instructions for setting up Test Cards](https://developer.apple.com/support/apple-pay-sandbox/)
 
 * __Device must be on same network as machine running `merchant_server.rb` script__
-=======
-
-* Device must be on same network as machine running `merchant_server.rb` script
->>>>>>> origin/master
