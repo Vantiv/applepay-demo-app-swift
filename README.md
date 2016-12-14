@@ -8,12 +8,12 @@ Apple Pay iOS App demonstrating how to integrate to Vantiv Integrated Payments
 
 * [Vantiv Integrated Payments Cert Account](https://www.vantiv.com/get-started)
 
-* Tokenization Enabled
-* WebServices Enabled
+  * Tokenization Enabled
+  * WebServices Enabled
 
 * [Vantiv eProtect Paypage ID](https://www.vantiv.com/get-started)
 
-* EWSv4 Support
+  * EWSv4 Support
 
 ## Setup
 
@@ -57,13 +57,13 @@ NOTE: Use `control+c` to quit the web server
 
 * Update `Settings.plist` with values for
 
-* `merchantServerAddress` - this will be the external ip address of the machine running the `merchant_server.rb` script
-* `paypageId` - provided by Vantiv Integrated Payments
+  * `merchantServerAddress` - this will be the external ip address of the machine running the `merchant_server.rb` script
+  * `paypageId` - provided by Vantiv Integrated Payments
 
 ## Run App in Xcode
 
 * Must run app on iOS device with ApplePay support
-* [Instructions for setting up Test Cards](https://developer.apple.com/support/apple-pay-sandbox/)
+  * [Instructions for setting up Test Cards](https://developer.apple.com/support/apple-pay-sandbox/)
 
 * __Device must be on same network as machine running `merchant_server.rb` script__
 
