@@ -6,16 +6,16 @@ Apple Pay iOS App demonstrating how to integrate to Vantiv Integrated Payments
 
 * [Apple Developer Account](https://developer.apple.com/programs/)
 
-* [Vantiv Integrated Payments Cert Account](https://www.vantiv.com)
+* [Vantiv Integrated Payments Cert Account](https://www.vantiv.com/get-started)
 
-  * Tokenization Enabled
-  * WebServices Enabled
+* Tokenization Enabled
+* WebServices Enabled
 
-* [Vantiv eProtect Paypage ID](https://www.vantiv.com)
+* [Vantiv eProtect Paypage ID](https://www.vantiv.com/get-started)
 
-  * EWSv4 Support
+* EWSv4 Support
 
-# Setup
+## Setup
 
 * Set up Apple Pay in developer account
 
@@ -27,7 +27,7 @@ Apple Pay iOS App demonstrating how to integrate to Vantiv Integrated Payments
 
 Following are needed for locally simulating a merchant server for the app to communicate with.
 
-Execute commands from the Terminal
+Execute commands from the Terminal.
 
 ### Install Brew
 
@@ -47,7 +47,7 @@ If it asks you to install XCode CommandLine Tools, say yes.
 
 Update `auth` with Base64 encoded credentials provided by Vantiv Integrated Payments
 
-### To run the Sinatra REST site
+### Run the Sinatra REST site
 
 `ruby merchant_server.rb`
 
@@ -62,7 +62,14 @@ NOTE: Use `control+c` to quit the web server
 
 ## Run App in Xcode
 
-* Must run app on iOS device w/ ApplePay support
-  * [Instructions for setting up Test Cards](https://developer.apple.com/support/apple-pay-sandbox/)
+* Must run app on iOS device with ApplePay support
+* [Instructions for setting up Test Cards](https://developer.apple.com/support/apple-pay-sandbox/)
 
 * __Device must be on same network as machine running `merchant_server.rb` script__
+
+## Additional Documentation
+[Apple Pay Development Information](https://developer.apple.com/apple-pay/)
+
+[Getting Started with MercuryPay](https://developer.vantiv.com/docs/DOC-1252)
+
+[Ecommerce Apple Pay](https://developer.vantiv.com/docs/DOC-1335)
