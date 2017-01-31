@@ -11,8 +11,8 @@
 		94356F851D6CF79A0044CBD5 /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94356F841D6CF79A0044CBD5 /* ItemTableViewController.swift */; };
 		94356F871D6CF7C40044CBD5 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94356F861D6CF7C40044CBD5 /* ItemTableViewCell.swift */; };
 		94356F891D6E1D660044CBD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94356F881D6E1D660044CBD5 /* LaunchScreen.storyboard */; };
+		94647D9D1E40ED16008C80FE /* merchant_server in Resources */ = {isa = PBXBuildFile; fileRef = 94647D9C1E40ED16008C80FE /* merchant_server */; };
 		94A9EC8C1DC9393200B8DCA5 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94A9EC8B1DC9393200B8DCA5 /* Settings.plist */; };
-		94A9EC8E1DC9457D00B8DCA5 /* merchant_server in Resources */ = {isa = PBXBuildFile; fileRef = 94A9EC8D1DC9457D00B8DCA5 /* merchant_server */; };
 		94A9EC901DC94B1A00B8DCA5 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 94A9EC8F1DC94B1A00B8DCA5 /* README.md */; };
 		94CFFD1F1D64CE2900A8432A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD1E1D64CE2900A8432A /* AppDelegate.swift */; };
 		94CFFD211D64CE2900A8432A /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CFFD201D64CE2900A8432A /* ItemViewController.swift */; };
@@ -45,9 +45,9 @@
 		94356F841D6CF79A0044CBD5 /* ItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		94356F861D6CF7C40044CBD5 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		94356F881D6E1D660044CBD5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		94647D9C1E40ED16008C80FE /* merchant_server */ = {isa = PBXFileReference; lastKnownFileType = folder; path = merchant_server; sourceTree = "<group>"; };
 		94A9EC881DC9353600B8DCA5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		94A9EC8B1DC9393200B8DCA5 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
-		94A9EC8D1DC9457D00B8DCA5 /* merchant_server */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merchant_server; path = ../merchant_server; sourceTree = "<group>"; };
 		94A9EC8F1DC94B1A00B8DCA5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94CFFD1B1D64CE2900A8432A /* ApplePayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApplePayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94CFFD1E1D64CE2900A8432A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,8 +93,8 @@
 		94CFFD121D64CE2800A8432A = {
 			isa = PBXGroup;
 			children = (
+				94647D9C1E40ED16008C80FE /* merchant_server */,
 				94A9EC8F1DC94B1A00B8DCA5 /* README.md */,
-				94A9EC8D1DC9457D00B8DCA5 /* merchant_server */,
 				94A9EC881DC9353600B8DCA5 /* .gitignore */,
 				94CFFD1D1D64CE2900A8432A /* ApplePayDemo */,
 				94CFFD351D64CE2A00A8432A /* ApplePayDemoTests */,
@@ -269,8 +269,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				94356F891D6E1D660044CBD5 /* LaunchScreen.storyboard in Resources */,
+				94647D9D1E40ED16008C80FE /* merchant_server in Resources */,
 				94A9EC8C1DC9393200B8DCA5 /* Settings.plist in Resources */,
-				94A9EC8E1DC9457D00B8DCA5 /* merchant_server in Resources */,
 				94CFFD291D64CE2900A8432A /* Assets.xcassets in Resources */,
 				94CFFD241D64CE2900A8432A /* Main.storyboard in Resources */,
 			);

@@ -20,7 +20,7 @@ class ItemTableViewController: UITableViewController {
     
     func loadSampleItems() {
         let photo1 = UIImage(named: "vantivFlask")!
-        let item1 = Item(name: "Vantiv Flask", photo: photo1, price: 5.19)!
+        let item1 = Item(name: "Vantiv Flask", photo: photo1, price: 1.19)!
         
         let photo2 = UIImage(named: "vantivCap")!
         let item2 = Item(name: "Vantiv Cap", photo: photo2, price: 6.55)!

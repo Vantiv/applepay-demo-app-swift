@@ -18,12 +18,13 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBOutlet weak var photoImageView: UIImageView!
     
     let SupportedPaymentNetworks = [PKPaymentNetwork.visa, PKPaymentNetwork.masterCard, PKPaymentNetwork.amex, PKPaymentNetwork.discover]
-    let ApplePayMerchantID = "merchant.com.mercury.prelive"
+    var applePayMerchantID: String = ""
     let ShippingPrice : NSDecimalNumber = NSDecimalNumber(string: "5.0")
     var item: Item?
     var merchantServerAddress: String = ""
     var merchantServerPort: String = ""
     var paypageId: String = ""
+    var eProtectUrl: String = ""
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,8 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         merchantServerAddress = dict["merchantServerAddress"]!
         merchantServerPort = dict["merchantServerPort"]!
         paypageId = dict["paypageId"]!
+        eProtectUrl = dict["eProtectUrl"]!
+        applePayMerchantID = dict["applePayMerchantID"]!
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +62,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBAction func buttonPressed(_ sender: AnyObject) {
         
         let request = PKPaymentRequest()
-        request.merchantIdentifier = ApplePayMerchantID
+        request.merchantIdentifier = applePayMerchantID
         request.supportedNetworks = SupportedPaymentNetworks
         request.merchantCapabilities = PKMerchantCapability.capability3DS
         request.countryCode = "US"
@@ -120,7 +123,7 @@ extension ItemViewController: PKPaymentAuthorizationViewControllerDelegate {
         postData.append("&applepay.header.transactionId=\(transactionId.stringByAddingPercentEncodingForRFC3986()!)".data(using: String.Encoding.utf8)!)
         postData.append("&applepay.header.applicationData=\(applicationData.stringByAddingPercentEncodingForRFC3986()!)".data(using: String.Encoding.utf8)!)
  
-        let request = NSMutableURLRequest(url: NSURL(string: "https://request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: eProtectUrl)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         request.httpMethod = "POST"

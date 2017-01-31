@@ -5,6 +5,7 @@
 	<key>com.apple.developer.in-app-payments</key>
 	<array>
 		<string>merchant.com.mercury.prelive</string>
+		<string>merchant.com.omni.prod</string>
 	</array>
 </dict>
 </plist>
