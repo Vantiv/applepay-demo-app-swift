@@ -2,10 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>eprotectHostHeader</key>
+	<string>request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage</string>
 	<key>applePayMerchantID</key>
 	<string></string>
-	<key>eProtectURL</key>
-	<string></string>
+	<key>eProtectUrl</key>
+	<string>https://request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage</string>
 	<key>merchantServerAddress</key>
 	<string>0.0.0.0</string>
 	<key>merchantServerPort</key>

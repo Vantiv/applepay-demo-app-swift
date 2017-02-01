@@ -19,12 +19,13 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     let SupportedPaymentNetworks = [PKPaymentNetwork.visa, PKPaymentNetwork.masterCard, PKPaymentNetwork.amex, PKPaymentNetwork.discover]
     var applePayMerchantID: String = ""
-    let ShippingPrice : NSDecimalNumber = NSDecimalNumber(string: "5.0")
+    let ShippingPrice : NSDecimalNumber = NSDecimalNumber(string: "0.0")
     var item: Item?
     var merchantServerAddress: String = ""
     var merchantServerPort: String = ""
     var paypageId: String = ""
     var eProtectUrl: String = ""
+    var eprotectHostHeader: String = ""
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         paypageId = dict["paypageId"]!
         eProtectUrl = dict["eProtectUrl"]!
         applePayMerchantID = dict["applePayMerchantID"]!
+        eprotectHostHeader = dict["eprotectHostHeader"]!
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,7 +108,7 @@ extension ItemViewController: PKPaymentAuthorizationViewControllerDelegate {
         //call eprotect with paymentData
         let headers = [
             "content-type": "application/x-www-form-urlencoded",
-            "host": "request-prelive.np-securepaypage-litle.com/LitlePayPage/paypage",
+            "host": eprotectHostHeader,
             "user-agent": "Litle/1.0 CFNetwork/459 Darwin/10.0.0.d3",
             "cache-control": "no-cache"
         ]
